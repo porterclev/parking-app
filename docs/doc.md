@@ -1,23 +1,23 @@
 ## Team 2 (Parking Garage)
 
-1.	**Alice Johnson**
-	- Student ID: 123456
-	- CSULB Email: alice.johnson@csulb.edu
-2.	**David Lee**
-	- Student ID: 789012
-	- CSULB Email: david.lee@csulb.edu
-3.	**Emily Rodriguez**
-	- Student ID: 345678
-	- CSULB Email: emily.rodriguez@csulb.edu
-4.	**Michael Patel**
-	- Student ID: 567890
-	- CSULB Email: michael.patel@csulb.edu
-5.	**Sophia Kim**
-	- Student ID: 234567
-	- CSULB Email: sophia.kim@csulb.edu
-6.	**Daniel Nguyen**
-	- Student ID: 901234
-	- CSULB Email: daniel.nguyen@csulb.edu
+1.	**Adriane San Gaspar**
+	- Student ID: 028648163
+	- CSULB Email: adriane.sangaspar012@student.csulb.edu
+2.	**Daphne Rios**
+	- Student ID: 
+	- CSULB Email: 
+3.	**Flavien Jean Guy Aurelien Maameri**
+	- Student ID:
+	- CSULB Email: 
+4.	**Mia Alvarez**
+	- Student ID: 
+	- CSULB Email: 
+5.	**Nicolas Piker**
+	- Student ID: 
+	- CSULB Email: 
+6.	**Porter Clevidence**
+	- Student ID: 
+	- CSULB Email: 
 7.	**Abram Ibarra**
 	- Student ID: 031652736
 	- CSULB Email: abram.ibarra01@student.cuslb.edu
