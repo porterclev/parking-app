@@ -45,15 +45,15 @@ parking-app is an application that helps users conveniently find and reserve par
 ### Project Overview
 "parking-app" is a web-based inventory management system designed for small businesses. It streamlines inventory tracking, order management, and reporting.
 ### Project Goals
-●	Improve inventory accuracy.
-●	Enhance order fulfillment efficiency.
-●	Provide real-time reporting capabilities.
+- Improve inventory accuracy.
+- Enhance order fulfillment efficiency.
+- Provide real-time reporting capabilities.
 
 ## Glossary
 (Define key terms and acronyms used throughout the document, unless they are commonly known to each possible stakeholder (e.g., “Cell phone”) AND used with their common meaning. Do not expect your stakeholders to be experts. If in doubt, define a term.)
-●	Inventory: The stock of products available for sale.
-●	SKU: Stock Keeping Unit, a unique identifier for each product.
-●	API: Application Programming Interface.
+- Inventory: The stock of products available for sale.
+- SKU: Stock Keeping Unit, a unique identifier for each product.
+- API: Application Programming Interface.
 
  
 ## User Requirements and Use Cases
