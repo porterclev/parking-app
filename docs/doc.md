@@ -44,7 +44,7 @@ parking-app is an application that helps users conveniently find and reserve par
 
 ### Project Overview
 "parking-app" is a web-based inventory management system designed for small businesses. It streamlines inventory tracking, order management, and reporting.
-##3 Project Goals
+### Project Goals
 ●	Improve inventory accuracy.
 ●	Enhance order fulfillment efficiency.
 ●	Provide real-time reporting capabilities.
