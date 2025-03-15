@@ -40,6 +40,7 @@ The intended audience of this document includes project stakeholders, developers
 
 ### Introduction
 (Introduce the software project, its goals, and the problem it aims to solve)
+parking-app is an application that helps users conveniently find and reserve parking spots in advance, reducing the time spent searching for parking. The system provides real-time availability updates, secure reservations, and user-friendly payment options.
 
 ### Project Overview
 "parking-app" is a web-based inventory management system designed for small businesses. It streamlines inventory tracking, order management, and reporting.
