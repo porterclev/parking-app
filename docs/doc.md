@@ -18,6 +18,9 @@
 6.	**Daniel Nguyen**
 	- Student ID: 901234
 	- CSULB Email: daniel.nguyen@csulb.edu
+7.	**Abram Ibarra**
+	- Student ID: 031652736
+	- CSULB Email: abram.ibarra01@student.cuslb.edu
 
 ## Preface
 (Describe the purpose of this document, its expected readership and its version history, including a rationale for the creation of a new version and a summary of the changes made in each version.)
@@ -30,7 +33,7 @@ Fixed version date notation, …
 
 
 ### Purpose
-This document serves as a comprehensive guide for the development and understanding of the software project titled "Super Project X 3000".
+This document serves as a comprehensive guide for the development and understanding of the software project titled "parking-app".
 
 ### Audience
 The intended audience of this document includes project stakeholders, developers, testers, and anyone involved in the project lifecycle.
