@@ -1,6 +1,7 @@
 # Parking Garage Automation
 Purpose: manage parking usage & online reservations for a parking garage.
 
+# Brand: The Pick & Park
 
 ## Use Cases
 [Google Docs](https://docs.google.com/document/d/1wQOWV-g5EWTjxiyPAfx74SzeqXMMYuInjmjYtLS8ANQ/edit?usp=sharing) <br>
