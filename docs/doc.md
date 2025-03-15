@@ -42,7 +42,7 @@ The intended audience of this document includes project stakeholders, developers
 (Introduce the software project, its goals, and the problem it aims to solve)
 
 ### Project Overview
-"ProjectX" is a web-based inventory management system designed for small businesses. It streamlines inventory tracking, order management, and reporting.
+"parking-app" is a web-based inventory management system designed for small businesses. It streamlines inventory tracking, order management, and reporting.
 ##3 Project Goals
 ●	Improve inventory accuracy.
 ●	Enhance order fulfillment efficiency.
@@ -63,8 +63,11 @@ The intended audience of this document includes project stakeholders, developers
 
 
 1.	As a registered user, I want to log in securely so that I cannot be held responsible for someone else’s actions.
-2.	As an inventory manager, I need to add new products to the inventory so that the database matches the physical inventory.
-3.	As a sales manager, I want to generate sales reports by date range so that the upper management can be kept up to date on the company’s performance.
+2.	As a user, I want to search for avaialable parking spots so that I can easily find a place to park.
+3.	As a user, I want to reserve a parking spot so that I am guaranteed a space until arrival.
+4.	As a parking lot owner, I want to automatically update the availability of parking sports so that users see up to date information.
+5.	As a user, I want to extend my parking time remotely so that I dont get fined.
+6.	As a user, I want to view my reservation history so that I can keep track of my parking expenses.
 
 ### Use Case: Adding a New Product
 | Identifier | [E.g., “UC-1 Book Trip”]   |
