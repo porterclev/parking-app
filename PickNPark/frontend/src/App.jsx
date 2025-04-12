@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import Home from './Home';
 import CreateAccount from './CreateAccount';
+import MapComponent from './mapcomponent';
 
 function App() {
     return (
