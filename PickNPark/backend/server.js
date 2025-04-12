@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const connectDB = require('./db/db');
 const authRoutes = require('./routes/authRoutes');
+const parkingRoutes = require('./routes/parkingRoutes');
 const app = express();
 const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -21,6 +22,8 @@ app.get('/', (req, res) => {
 
 // Auth routes
 app.use('/api/auth', authRoutes);
+app.use('/api/parking', parkingRoutes);
+
 
 // Stripe Checkout route
 app.post('/create-checkout-session', async (req, res) => {
