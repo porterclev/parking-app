@@ -9,7 +9,7 @@ const MapComponent = () => {
   return (
     <APIProvider apiKey={apiKey}>
       <Map
-        style={{ width: '100vw', height: '100vh' }}
+        style={{ width: '50vw', height: '50vh' }}
         defaultCenter={{ lat: 33.7701, lng: -118.1937 }} // New York City
         defaultZoom={10}
         gestureHandling={'greedy'}
