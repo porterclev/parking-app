@@ -1,0 +1,33 @@
+.header{
+    position:relative;
+    height: 500px;
+    overflow: hidden;
+}
+
+#header-bg{
+    background-image: url(../../assets/parkinglot1.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    filter: blur(4px);
+    position: absolute;
+    height: 800px;
+    width: 100%; 
+    z-index: 0;
+}
+
+#header-text{
+    position: relative;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 100px;
+}
+#header-text img{
+    opacity: 0.9;
+}
+
+.overview{
+    background-color: aliceblue;
+}
