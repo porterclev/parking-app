@@ -1,4 +1,5 @@
 import React from "react";
+import PickNParkIcon from "../../assets/PickNParkIcon.png";
 import {
     Box,
     FooterContainer,
@@ -14,17 +15,13 @@ const Footer = () => {
             
             <FooterContainer>
                 <Row>
-                    <Column>
-                        <h1
-                            style={{
-                                color: "#fff",
-                                textAlign: "center",
-                                marginTop: "10px",
-                            }}
-                        >
-                            PickNPark
-                        </h1>
-                        <img src="" alt="" />
+                    <Column style={{}}>
+                        <div style={{display:"flex", flexDirection:"row", justifyContent:"center"}}>
+                            <h1 style={{fontSize:"3rem",color:"#008698"}}>Pick</h1>
+                            <h1 style={{fontSize:"3rem",color:"#FFC53A"}}>N</h1>
+                            <h1 style={{fontSize:"3rem",color:"#008698"}}>Park</h1>
+                        </div>
+                        <img src={PickNParkIcon} alt="" style={{width:"95%",height:"auto"}}/>
                     </Column>
                     
                     <Column>
@@ -94,6 +91,11 @@ const Footer = () => {
                     </Column>
                 </Row>
             </FooterContainer>
+            <div style={{textAlign:"center", color:"#fff", display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"center", marginTop:"20px"}}>
+                <p>© 2025 PickNPark. All rights reserved. | </p>
+                <p>Privacy Policy | Terms of Service </p>
+                <p>| Made with ❤️ by Adriane San Gaspar</p>
+            </div>
         </Box>
     );
 };

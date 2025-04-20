@@ -1,6 +1,6 @@
 import PickNParkHomeBackground from '../assets/PickNParkHomeBackground.png';
+import PickNPark from '../assets/PickNPark.png';
 import { NavLink as Link } from "react-router-dom";
-import MapComponent from "../components/Map/mapcomponent";
 import "./styles/Home.style.css"
 
 
@@ -46,6 +46,7 @@ const Home = () => {
             <img src={PickNParkHomeBackground} alt="" style={{
                 width:"30%", 
                 borderRadius: "4px",
+                backgroundColor:"#FFD63A",
                 boxShadow:"20px 20px"}}/>   
         </div>
         <div className="overview2" style={{
@@ -54,9 +55,10 @@ const Home = () => {
             flexDirection:"row",
             justifyContent:"space-around",
             }}>
-                <img src={PickNParkHomeBackground} alt="" style={{
+                <img src={PickNPark} alt="" style={{
                     width:"30%", 
                     borderRadius: "4px",
+                    backgroundColor:"#F75A5A",
                     boxShadow:"20px 20px"}}/>
                 <div className='overview1-text' style={{
                     display:"flex",
@@ -73,11 +75,11 @@ const Home = () => {
                     </p>
                     <div>
                         <h3>With a few clicks, you can:</h3>
-                        <ul style={{listStyleType:"none", padding:"0 2rem 0 2rem"}}> 
-                            <li> <b style={{color:"#F75A5A"}}>Search</b> for nearby parking</li>
-                            <li> <b style={{color:"#6DE1D2"}}>View</b> for real-time availabilty</li>
-                            <li> <b style={{color:"#FFD63A"}}>Reserve</b> your spot instantly</li>
-                            <li> <b style={{color:"#FFA955"}}>Pay</b> seamlessly online</li>
+                        <ul style={{listStyleType:"", padding:"0 2rem 0 2rem"}}> 
+                            <li> <b style={{color:"#F75A5A"}}>Search</b> for nearby parking.</li>
+                            <li> <b style={{color:"#6DE1D2"}}>View</b> for real-time availabilty.</li>
+                            <li> <b style={{color:"#FFD63A"}}>Reserve</b> your spot instantly.</li>
+                            <li> <b style={{color:"#FFA955"}}>Pay</b> seamlessly online.</li>
                         </ul>
                     </div>
                 </div>         
@@ -87,24 +89,53 @@ const Home = () => {
             backgroundColor:"#FFD63A", 
             padding:"5rem 2rem",
             display:"flex",
-            flexDirection:"row",}}>
-            <p>Need to earn extra cash?List your own driveway or space and start earning today</p>
-            <h1>Pick. Park. Done.</h1>
+            flexDirection:"row",
+            justifyContent:"space-around",
+
+            }}>
+            <div>
+                <div style={{
+                    display:"flex",
+                    direction:"row",}}>
+                    <h1 style={{fontSize:"5rem",lineHeight: '0.8'}}>Need to <br />earn extra </h1>
+                    <h1><b style={{color:"#16C47F", fontSize:"8rem"}}>$?</b></h1>
+                </div>
+            <p>List your own driveway or space and start earning today</p>
+            <button>List here</button>
+            </div>
+
+            <div style={{
+                display:"flex",
+                flexDirection:"row",
+                backgroundColor:"#FFA955",
+                borderRadius:"4px",
+                border:"1px solid #000",
+                boxShadow:"20px 20px",
+                justifyContent:"center",
+                paddingTop:"2rem",
+                alignItems:"start",
+                width:"25%",
+            }}>
+                <div style={{
+                    display:"flex",
+                    flexDirection:"column",
+                    justifyContent:"start",
+                    alignItems:"center",
+                    fontSize:"1rem",
+                    textShadow:"2px 2px gray",
+                }}>
+                    <h1>Pick. </h1>
+                    <h1>Park.</h1>
+                </div>
+                <div>
+                    <h1 style={{color:"#6DE1D2", fontSize:"7.25rem", textShadow:"2px 2px gray"}}>Done.</h1>
+                </div>
+            </div>
+            
         </div>
 
-        <div className='overview3' style={{
-            backgroundColor:"#FFA955", 
-            padding:"5rem 2rem",
-            display:"flex",
-            flexDirection:"row",}}>
-            <p>
-                callto action buttons
-                FindParking
-                List Your Space
-                Login(maybe)
-            </p>
-        </div>
-        {/* <MapComponent /> */}
+        
+        
         </>
         
     );

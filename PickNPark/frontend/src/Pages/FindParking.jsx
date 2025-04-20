@@ -1,6 +1,8 @@
+import MapComponent from "../components/Map/mapcomponent";
 const FindParking = () => {
     return (
         <>
+        
         <div>
             <h2>Book your parking space, for $40 a week</h2>
             <ul>
@@ -20,6 +22,11 @@ const FindParking = () => {
             <div>
                 <p>searchbar</p>
             </div>
+        </div>
+
+        <div className="map-section">
+            <h2>Find your parking space</h2>
+            <MapComponent />
         </div>
         </>
         
