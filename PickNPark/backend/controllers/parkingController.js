@@ -1,64 +1,73 @@
 const Parking = require('../models/Parking');
+// Reserve w time
+exports.reserveSpot = async (req, res) => {
+  try {
+    const { spotNumber, duration } = req.body;    // duration en minutes
+
+    if (!duration || duration <= 0) {
+      return res.status(400).json({ message: 'Duration must be a positive number' });
+    }
+
+    const now = new Date();
+    const expires = new Date(now.getTime() + duration * 60000);
+
+    // only if reservedBy = null
+    const spot = await Parking.findOneAndUpdate(
+      { spotNumber, reservedBy: null },
+      { $set: { reservedBy: req.user._id, reservedAt: now, reservedUntil: expires } },
+      { new: true }
+    );
+
+    if (!spot) {
+      return res.status(400).json({ message: 'Spot not found or already reserve' });
+    }
+
+    return res.status(200).json({ message: 'Successfull booking', spot });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Serv error' });
+  }
+};
+
+// release expired spots
 
 exports.getParkingSpots = async (req, res) => {
   try {
+    const now = new Date();
+    await Parking.updateMany(
+      { reservedUntil: { $lte: now }, reservedBy: { $ne: null } },
+      { $set: { reservedBy: null, reservedAt: null, reservedUntil: null } }
+    );
+
     const spots = await Parking.find();
-    res.status(200).json({ spots });
+    return res.status(200).json({ spots });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Serv Error' });
+    return res.status(500).json({ message: 'Serv error' });
   }
 };
 
-exports.reserveSpot = async (req, res) => {
-  try {
-    const { parkingId } = req.body;
-
-    // Search for parking spot by Id
-    const parkingSpot = await Parking.findById(parkingId);
-    if (!parkingSpot) {
-      return res.status(404).json({ message: 'Wrong parking spot' });
-    }
-    
-    // Search if parking spot is already reserved
-    if (parkingSpot.reservedBy) {
-      return res.status(400).json({ message: 'Already reserved' });
-    }
-
-    // Reservation : Associate User connected with req.user
-    parkingSpot.reservedBy = req.user._id;
-    parkingSpot.reservedAt = new Date();
-    await parkingSpot.save();
-
-    res.status(200).json({ message: 'Reservation done with succeed', spot: parkingSpot });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Serv error' });
-  }
-};
-
+//cancel : empty reservedUntil
 exports.cancelReservation = async (req, res) => {
   try {
-    const { parkingId } = req.body;
-
-    const parkingSpot = await Parking.findById(parkingId);
-    if (!parkingSpot) {
-      return res.status(404).json({ message: 'Wrong parking spot' });
+    const { spotNumber } = req.body;
+    const spot = await Parking.findOne({ spotNumber });
+    if (!spot) {
+      return res.status(404).json({ message: 'Spot not found' });
+    }
+    if (!spot.reservedBy || spot.reservedBy.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: 'Not authorized to cancel this reservation' });
     }
 
-    // Verify if the parking spot is reserved by the user
-    if (!parkingSpot.reservedBy || parkingSpot.reservedBy.toString() !== req.user._id.toString()) {
-      return res.status(403).json({ message: 'Unauthorized to cancel the reservation' });
-    }
+    spot.reservedBy   = null;
+    spot.reservedAt   = null;
+    spot.reservedUntil= null;
+    await spot.save();
 
-    // Cancel reservation
-    parkingSpot.reservedBy = null;
-    parkingSpot.reservedAt = null;
-    await parkingSpot.save();
-
-    res.status(200).json({ message: 'Reservation cancel with succeed', spot: parkingSpot });
+    return res.status(200).json({ message: 'Canceled reservation', spot });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Serv error' });
+    return res.status(500).json({ message: 'Serv error' });
   }
 };
+

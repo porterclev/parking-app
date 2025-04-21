@@ -3,6 +3,7 @@ const express = require('express');
 const connectDB = require('./db/db');
 const authRoutes = require('./routes/authRoutes');
 const parkingRoutes = require('./routes/parkingRoutes');
+const Parking = require('./models/Parking');
 const app = express();
 const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
