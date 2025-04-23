@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { useParkingContext } from '@/context/ParkingContext';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/Pages/ui/button';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/Pages/ui/card';
 import { format } from 'date-fns';
 import { CheckCircle, Home, Calendar, Clock, CircleParking, Share2 } from 'lucide-react';
 

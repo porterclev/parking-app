@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParkingContext } from '@/context/ParkingContext';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/Pages/ui/button';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/Pages/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/Pages/ui/tabs';
 import { ArrowLeft, Accessibility, Zap, Ban } from 'lucide-react';
 import { cn } from '@/lib/utils';
 

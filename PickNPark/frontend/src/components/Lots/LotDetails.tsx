@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParkingContext } from '@/context/ParkingContext';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Button } from '@/Pages/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/Pages/ui/card';
+import { Badge } from '@/Pages/ui/badge';
 import { ArrowLeft, CircleParking, Car, Clock, DollarSign, MapPin } from 'lucide-react';
 
 const LotDetails = () => {

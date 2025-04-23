@@ -1,11 +1,11 @@
 
 import React from 'react';
 import { useParkingContext } from '@/context/ParkingContext';
-import MapView from './MapView';
+import MapView from '../Map/MapView';
 import LotDetails from './LotDetails';
 import SpotSelection from './SpotSelection';
-import PaymentView from './PaymentView';
-import ConfirmationView from './ConfirmationView';
+import PaymentView from '../Payment/PaymentView';
+import ConfirmationView from '../Payment/ConfirmationView';
 import { CircleParking } from 'lucide-react';
 
 const ParkingLayout = () => {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent } from "./ui/card";
-import { useParkingContext } from '../context/ParkingContext';
-import { Button } from '../components/ui/button';
+import { Card, CardContent } from "../../Pages/ui/card";
+import { useParkingContext } from '../../context/ParkingContext';
+import { Button } from '../../Pages/ui/button';
 import { MapPin } from 'lucide-react';
-import MapComponent from '../mapcomponent';
+import MapComponent from '../../mapcomponent';
 
 type MapLocation = {
   id: string;

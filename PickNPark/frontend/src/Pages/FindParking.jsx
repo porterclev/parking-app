@@ -1,7 +1,5 @@
-import MapComponent from "../components/Map/mapcomponent";
-import MapView from "../components/MapView";
 import { ParkingProvider } from '@/context/ParkingContext';
-import ParkingLayout from '@/components/ParkingLayout';
+import ParkingLayout from '@/components/Lots/ParkingLayout';
 const FindParking = () => {
     return (
         <>

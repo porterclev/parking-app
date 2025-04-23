@@ -1,16 +1,16 @@
 
 import React, { useState } from 'react';
 import { useParkingContext } from '@/context/ParkingContext';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Button } from '@/Pages/ui/button';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/Pages/ui/card';
+import { Input } from '@/Pages/ui/input';
+import { Label } from '@/Pages/ui/label';
 import { ArrowLeft, Clock, CalendarIcon, CreditCard, CheckCircle } from 'lucide-react';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/Pages/ui/popover';
+import { Calendar } from '@/Pages/ui/calendar';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/Pages/ui/select';
 
 const PaymentView = () => {
   const { selectedLot, selectedSpot, setCurrentView, updateReservation, reservation } = useParkingContext();
