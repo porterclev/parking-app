@@ -1,4 +1,5 @@
-import MapComponent from "../components/Map/mapcomponent";
+import { ParkingProvider } from '@/context/ParkingContext';
+import ParkingLayout from '@/components/Lots/ParkingLayout';
 const FindParking = () => {
     return (
         <>
@@ -26,7 +27,9 @@ const FindParking = () => {
 
         <div className="map-section">
             <h2>Find your parking space</h2>
-            <MapComponent />
+            <ParkingProvider>
+                <ParkingLayout />
+            </ParkingProvider>
         </div>
         </>
         
