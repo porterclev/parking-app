@@ -1,4 +1,5 @@
 const Parking = require('../models/Parking');
+
 // Reserve w time
 exports.reserveSpot = async (req, res) => {
   try {
@@ -71,3 +72,33 @@ exports.cancelReservation = async (req, res) => {
   }
 };
 
+//list spots owned by authenticated user
+exports.getSpotsByOwner = async (req, res) => {
+  try {
+    const spots = await Parking.find({ owner: req.user._id });
+    return res.status(200).json({ spots });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Server error' });
+  }
+};
+
+//assign owner to parking spot to the authenticated user
+exports.assignOwner = async (req, res) => {
+  try {
+    const { spotNumber } = req.body;
+    const spot = await Parking.findOne({ spotNumber });
+    if (!spot) {
+      return res.status(404).json({ message: 'Place introuvable' });
+    }
+    if (spot.owner) {
+      return res.status(400).json({ message: 'Place déjà possédée' });
+    }
+    spot.owner = req.user._id;
+    await spot.save();
+    return res.status(200).json({ message: 'Propriété assignée', spot });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Erreur serveur' });
+  }
+};
