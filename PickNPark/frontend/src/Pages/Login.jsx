@@ -16,12 +16,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            await login(identifier, password);
-        } catch (error) {
-            console.error('Error logging in:', error);
-            alert('An error occurred. Please try again.');
-        }
+        await login(identifier, password);
     };
 
     return (

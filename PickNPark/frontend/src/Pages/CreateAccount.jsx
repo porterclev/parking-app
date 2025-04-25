@@ -17,15 +17,7 @@ const CreateAccount = () => {
 
     const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-        await signup(userName, email, password);
-        if (isAuthenticated) {
-            navigate('/');
-        }
-    } catch (error) {
-        console.error('Error creating account:', error);
-        alert('An error occurred. Please try again.');
-    }
+    await signup(userName, email, password);
 };
 
     return (
