@@ -13,7 +13,6 @@ interface AuthContextType {
     login: (email: string, password: string) => Promise<void>;
     signup: (email: string, password: string, name?: string) => Promise<void>;
     logout: () => Promise<void>;
-    resetPassword: (email: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -104,49 +103,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
 
     const logout = async () => {
-        /*
-        try {
-
-            const token = localStorage.getItem('auth_token');
-            if (token) {
-                await fetch('/api/auth/logout', {
-                    method: 'POST',
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-            }
-        } catch (error) {
-            console.error('Logout error:', error);
-        } finally {
-            localStorage.removeItem('token');
-            setUser(null);
-        }
-         */
         localStorage.removeItem('token');
         setUser(null);
         setIsAuthenticated(false);
-    };
-
-
-    const resetPassword = async (email: string) => {
-        /*
-        try {
-            const response = await fetch('/api/auth/reset-password', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email })
-            });
-            if (!response.ok) {
-                throw new Error('Password reset request failed');
-            }
-        } catch (error) {
-            console.error('Reset password error:', error);
-            throw error;
-        }
-        */
     };
 
     const value: AuthContextType = {
@@ -156,7 +115,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         login,
         signup,
         logout,
-        resetPassword
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
