@@ -6,8 +6,8 @@ const app = express();
 const cors = require('cors');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-const PORT = process.env.PORT || 5001;
-const YOUR_DOMAIN = process.env.DOMAIN || 'http://localhost:5001';
+const PORT = process.env.PORT || 5000;
+const YOUR_DOMAIN = process.env.DOMAIN || 'http://localhost:5000';
 
 app.use(cors());
 connectDB();

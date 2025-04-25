@@ -1,11 +1,19 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import {useAuth} from "../context/AuthContext.js";
 
 const CreateAccount = () => {
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { signup, isAuthenticated } = useAuth();
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate('/');
+        }
+    }, [isAuthenticated]);
 
     const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +25,7 @@ const CreateAccount = () => {
             password: password,
         });
 
-        const response = await fetch('http://localhost:5001/api/auth/register', {
+        const response = await fetch('http://localhost:5000/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

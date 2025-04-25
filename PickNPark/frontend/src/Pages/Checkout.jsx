@@ -9,7 +9,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 const Checkout = () => {
   const fetchClientSecret = useCallback(() => {
-    return fetch('http://localhost:5001/create-checkout-session', {
+    return fetch('http://localhost:5000/create-checkout-session', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ priceId: 'price_1RMDjFQOCKCphDvbla77q6jC' }) // Replace with your actual Price ID

@@ -8,8 +8,12 @@ import {
     NavBtnLink,
 } from "./navbarelements";
 import PickNPark from '../../assets/PickNPark.png'
+import {useAuth} from "../../context/AuthContext.js";
 
 const Navbar = () => {
+
+    const { isAuthenticated, logout } = useAuth();
+
     return (
         <>
             <Nav>
@@ -39,12 +43,9 @@ const Navbar = () => {
                     </NavLink>
                 </NavMenu>
                 <NavBtn>
-                   <NavBtnLink to="/signup">
-                        Sign Up
-                    </NavBtnLink>
-                    <NavBtnLink to="/login">
-                        Log In
-                    </NavBtnLink>
+                    { isAuthenticated ? <NavBtnLink to="/" onClick={logout}>logout</NavBtnLink> : null }
+                    { !isAuthenticated ? <NavBtnLink to="/signup">Sign Up</NavBtnLink> : null}
+                    { !isAuthenticated ? <NavBtnLink to="/login">Login</NavBtnLink> : null}
                 </NavBtn>
             </Nav>
         </>

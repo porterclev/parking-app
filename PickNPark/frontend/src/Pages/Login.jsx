@@ -1,16 +1,24 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import {useAuth} from "../context/AuthContext.js";
 
 const Login = () => {
     const [identifier, setIdentifier] = useState(''); // Can be email or username
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { login, isAuthenticated } = useAuth();
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate('/');
+        }
+    }, [isAuthenticated]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:5001/api/auth/login', {
+            const response = await fetch('http://localhost:5000/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -32,7 +40,7 @@ const Login = () => {
                 alert(data.message || 'Invalid email/username or password');
             }
         } catch (error) {
-            console.error('Error during login:', error);
+            console.error('Error logging in:', error);
             alert('An error occurred. Please try again.');
         }
     };
