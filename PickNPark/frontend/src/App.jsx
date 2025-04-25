@@ -10,9 +10,11 @@ import CreateAccount from './Pages/CreateAccount';
 import About from './Pages/About';
 import NoPage from './Pages/NoPage';
 import FindParking from './Pages/FindParking';
+import {AuthProvider} from "@/context/AuthContext.js";
 
 function App() {
     return (
+        <AuthProvider>
         <Router>
             <Navbar />
             <Routes>      
@@ -25,6 +27,7 @@ function App() {
             </Routes>
             <Footer />
         </Router>
+        </AuthProvider>
     );
 }
 

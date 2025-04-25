@@ -1,42 +1,26 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import {useAuth} from "../context/AuthContext.js";
 
 const CreateAccount = () => {
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { signup, isAuthenticated } = useAuth();
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate('/');
+        }
+    }, [isAuthenticated]);
 
     const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-        console.log('Sending Request:', {
-            username: userName,
-            email: email,
-            password: password,
-        });
-
-        const response = await fetch('http://localhost:5000/api/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: userName,
-                email: email,
-                password: password,
-            }),
-        });
-
-        const data = await response.json();
-        console.log('Response:', data);
-
-        if (response.ok) {
-            alert('Account created successfully!');
-            navigate('/'); // Redirect to the login page
-        } else {
-            alert(data.message || 'Failed to create account');
+        await signup(userName, email, password);
+        if (isAuthenticated) {
+            navigate('/');
         }
     } catch (error) {
         console.error('Error creating account:', error);
