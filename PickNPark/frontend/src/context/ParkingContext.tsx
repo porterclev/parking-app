@@ -48,7 +48,27 @@ type ParkingContextType = {
   reservation: ReservationDetails;
   updateReservation: (details: Partial<ReservationDetails>) => void;
   resetReservation: () => void;
+  findNearbyParkingLots: (lat: number, lng: number) => void;
+  selectedLocation: { lat: number; lng: number } | null;
+  setSelectedLocation: (location: { lat: number; lng: number } | null) => void;
 };
+
+const calculateDistance = (lat1, lon1, lat2, lon2) => {
+  const R = 6371; // Radius of the Earth in km
+  const dLat = deg2rad(lat2 - lat1);
+  const dLon = deg2rad(lon2 - lon1);
+  const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distance = R * c;
+  return distance;
+};
+
+const deg2rad = (deg) => {
+  return deg * (Math.PI / 180)
+}
 
 const ParkingContext = createContext<ParkingContextType | undefined>(undefined);
 
@@ -150,6 +170,10 @@ export const ParkingProvider = ({ children }: { children: ReactNode }) => {
     cost: 0
   });
 
+
+  const [nearbyLots, setNearbyLots] = useState<ParkingLot[]>(sampleParkingLots);
+  const [selectedLocation, setSelectedLocation] = useState<{ lat: number; lng: number } | null>(null);
+
   // When a new lot is selected, reset the spot selection
   const handleLotSelection = (lot: ParkingLot | null) => {
     setSelectedLot(lot);
@@ -170,6 +194,17 @@ export const ParkingProvider = ({ children }: { children: ReactNode }) => {
     setReservation(prev => ({ ...prev, ...details }));
   };
 
+  const findNearbyParkingLots = (lat: number, lng: number) => {
+    const maxDistance = 5; // 5 km radius
+    const nearby = sampleParkingLots.filter(lot => {
+      const distance = calculateDistance(lat, lng, lot.lat, lot.lng);
+      return distance <= maxDistance;
+    });
+
+    setNearbyLots(nearby);
+    setSelectedLocation({ lat, lng });
+  };
+
   const resetReservation = () => {
     setReservation({
       parkingLot: null,
@@ -188,7 +223,7 @@ export const ParkingProvider = ({ children }: { children: ReactNode }) => {
   const value = {
     currentView,
     setCurrentView,
-    parkingLots: sampleParkingLots,
+    parkingLots: nearbyLots,
     selectedLot,
     setSelectedLot: handleLotSelection,
     selectedLevel,
@@ -198,7 +233,10 @@ export const ParkingProvider = ({ children }: { children: ReactNode }) => {
     setSelectedSpot,
     reservation,
     updateReservation,
-    resetReservation
+    resetReservation,
+    findNearbyParkingLots,
+    selectedLocation,
+    setSelectedLocation,
   };
 
   return <ParkingContext.Provider value={value}>{children}</ParkingContext.Provider>;

@@ -6,13 +6,12 @@ import LotDetails from './LotDetails';
 import SpotSelection from './SpotSelection';
 import PaymentView from '../Payment/PaymentView';
 import ConfirmationView from '../Payment/ConfirmationView';
-import { CircleParking } from 'lucide-react';
 
 const ParkingLayout = () => {
   const { currentView } = useParkingContext();
   
   return (
-    <div className="container py-6 max-w-5xl">
+    <div className="container max-w-5xl">
       
       <main>
         {currentView === "map" && <MapView />}

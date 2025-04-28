@@ -1,6 +1,9 @@
 import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
+import {useParkingContext} from "./context/ParkingContext.js";
 
-const MapComponent = ({ locations, selectedLocation, onSelectLocation }) => {
+const MapComponent = ({ locations, selectedLocation, onSelectLocation, center }) => {
+
+    const  { findNearbyParkingLots } = useParkingContext()
   const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   if (!apiKey) {
     return <p>Error: Google Maps API key is missing.</p>;
@@ -24,7 +27,14 @@ const MapComponent = ({ locations, selectedLocation, onSelectLocation }) => {
         style={{ width: '100%', height: '100%' }}
         defaultCenter={{ lat: 33.7859, lng: -118.1089 }} // csulb
         defaultZoom={17}
+        center={ center }
         gestureHandling="greedy"
+        onCenterChanged= { (center) => {
+            findNearbyParkingLots(
+                center.map.getCenter().lat(),
+                center.map.getCenter().lng()
+            )
+        }}
         disableDefaultUI={false}
         options={{
           disableDefaultUI: true, // Removes all default UI
