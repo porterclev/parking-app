@@ -12,30 +12,31 @@ type MapLocation = {
 };
 
 const MapView = () => {
-  const [mapApiStatus, setMapApiStatus] = useState<"loading" | "ready" | "error">("loading");
-  const { parkingLots, setSelectedLot } = useParkingContext();
+    const [mapApiStatus, setMapApiStatus] = useState<"loading" | "ready" | "error">("loading");
+    const { parkingLots, setSelectedLot, selectedLocation } = useParkingContext();
+    const [locations, setLocations] = useState<MapLocation[]>([]);
+    const [selectedLocationId, setSelectedLocationId] = useState<string | null>(null);
 
-  const [locations] = useState<MapLocation[]>(
-    parkingLots.map((lot) => ({
-      id: lot.id,
-      position: { lat: lot.lat, lng: lot.lng },
-      title: lot.name,
-    }))
-  );
-  
-  const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
+    useEffect(() => {
+        setLocations(parkingLots.map((lot) => ({
+            id: lot.id,
+            position: { lat: lot.lat, lng: lot.lng },
+            title: lot.name,
+        })));
+    }, [parkingLots]);
 
-  useEffect(() => {
-    setMapApiStatus("ready");
-  }, []);
+    useEffect(() => {
+        setMapApiStatus("ready");
+    }, []);
 
-  const handleSelectParkingLot = (locationId: string) => {
-    setSelectedLocation(locationId);
-    const lot = parkingLots.find((lot) => lot.id === locationId);
-    if (lot) {
-      setSelectedLot(lot);
-    }
-  };
+    const handleSelectParkingLot = (locationId: string) => {
+
+        setSelectedLocationId(locationId);
+        const lot = parkingLots.find((lot) => lot.id === locationId);
+        if (lot) {
+            setSelectedLot(lot);
+        }
+    };
 
   if (mapApiStatus === "loading") {
     return (
@@ -58,15 +59,16 @@ const MapView = () => {
   }
 
   return (
-    <div className="relative w-full h-[60vh] overflow-hidden rounded-lg border border-border">
+    <div className="w-screen h-screen overflow-hidden">
       {/* Pass locations and handlers to MapComponent */}
       <MapComponent
         locations={locations}
         selectedLocation={selectedLocation}
         onSelectLocation={handleSelectParkingLot}
+        center = { selectedLocation || undefined }
       />
 
-      <div className="absolute top-0 right-0 p-4">
+      <div className="absolute top-0 right-0 py-40 px-10 space-y-4 z-10">
         <Card className="w-64 bg-white/90 backdrop-blur-sm">
           <CardContent className="p-4">
             <h3 className="font-semibold text-base mb-2">Available Parking</h3>
@@ -74,7 +76,7 @@ const MapView = () => {
               {locations.map((location) => (
                 <Button
                   key={location.id}
-                  variant={selectedLocation === location.id ? "default" : "outline"}
+                  variant={selectedLocationId === location.id ? "default" : "outline"}
                   className="w-full justify-start text-left"
                   onClick={() => handleSelectParkingLot(location.id)}
                 >

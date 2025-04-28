@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface User {
     id: string;
@@ -48,7 +48,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 // Save the token to localStorage or cookies if needed
                 localStorage.setItem('token', data.token);
                 setUser(data.user);
-
                 // Redirect to the homepage
             } else {
                 alert(data.message || 'Invalid email/username or password');
