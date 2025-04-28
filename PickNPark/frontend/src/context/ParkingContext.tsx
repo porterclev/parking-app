@@ -1,5 +1,5 @@
 
-import React, { createContext, useState, useContext, ReactNode } from "react";
+import React, {createContext, useState, useContext, ReactNode, useEffect} from "react";
 
 export type ParkingSpot = {
   id: string;
@@ -193,6 +193,11 @@ export const ParkingProvider = ({ children }: { children: ReactNode }) => {
   const updateReservation = (details: Partial<ReservationDetails>) => {
     setReservation(prev => ({ ...prev, ...details }));
   };
+
+  // Initial nearby listings based on Maps default center.
+  useEffect(() => {
+    findNearbyParkingLots(33.7859, -118.1089);
+  }, []);
 
   const findNearbyParkingLots = (lat: number, lng: number) => {
     const maxDistance = 5; // 5 km radius
