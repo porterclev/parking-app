@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const parkingController = require('../controllers/parkingController');
 const authMiddleware = require('../middlewares/auth');
+const auth = require('../middlewares/auth');
 
 //route pour récupérer toutes les places
 router.get('/', authMiddleware, parkingController.getParkingSpots);
