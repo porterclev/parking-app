@@ -94,7 +94,6 @@ const Footer = () => {
             <div style={{textAlign:"center", color:"#fff", display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"center", marginTop:"20px"}}>
                 <p>© 2025 PickNPark. All rights reserved. | </p>
                 <p>Privacy Policy | Terms of Service </p>
-                <p>| Made with ❤️ by Adriane San Gaspar</p>
             </div>
         </Box>
     );
