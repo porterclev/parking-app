@@ -25,31 +25,42 @@ const PaymentView = () => {
     setCurrentView("spotSelection");
   };
   
-  const handlePayment = () => {
+  const handlePayment = async () => {
     if (!startTime) return;
     
     setPaymentProcessing(true);
-    
+    const token = localStorage.getItem('token');
+    console.log(token);
     const durationHours = parseInt(duration);
     const endTime = new Date(startTime);
     endTime.setHours(endTime.getHours() + durationHours);
     
     const cost = selectedSpot.hourlyRate * durationHours;
-    
+    const response = await fetch(`http://localhost:5000/api/parking/reserve`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`, // Add the token here
+                },
+                body: JSON.stringify({
+                    lot: selectedLot,
+                    spot: selectedSpot,
+                    duration: durationHours,
+                    date: startTime
+                }),
+            });
+    console.log(response);
     // Simulate payment processing
-    setTimeout(() => {
-      updateReservation({
-        parkingLot: selectedLot,
-        parkingSpot: selectedSpot,
-        startTime: startTime,
-        endTime: endTime,
-        duration: durationHours,
-        cost
-      });
-      
-      setCurrentView("confirmation");
-    }, 1500);
-    goToStripe
+    // setTimeout(() => {
+    //   updateReservation({
+    //     parkingLot: selectedLot,
+    //     parkingSpot: selectedSpot,
+    //     startTime: startTime,
+    //     endTime: endTime,
+    //     duration: durationHours,
+    //     cost
+    //   });
+    goToStripe();
   };
   
   // Generate time slots for the select

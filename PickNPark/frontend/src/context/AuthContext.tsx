@@ -46,6 +46,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 alert('Login successful!');
                 setIsAuthenticated(true);
                 // Save the token to localStorage or cookies if needed
+                console.log("TOKEN,", data.token)
                 localStorage.setItem('token', data.token);
                 setUser(data.user);
                 // Redirect to the homepage
