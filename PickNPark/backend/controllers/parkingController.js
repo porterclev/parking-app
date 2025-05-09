@@ -38,11 +38,11 @@ exports.reserveSpot = async (req, res) => {
 
 exports.getParkingSpots = async (req, res) => {
   try {
-    const now = new Date();
-    await Parking.updateMany(
-      { reservedUntil: { $lte: now }, reservedBy: { $ne: null } },
-      { $set: { reservedBy: null, reservedAt: null, reservedUntil: null } }
-    );
+    // const now = new Date();
+    // await Parking.updateMany(
+    //   { reservedUntil: { $lte: now }, reservedBy: { $ne: null } },
+    //   { $set: { reservedBy: null, reservedAt: null, reservedUntil: null } }
+    // );
 
     const spots = await Parking.find();
     return res.status(200).json({ spots });
