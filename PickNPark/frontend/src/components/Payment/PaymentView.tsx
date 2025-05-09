@@ -11,6 +11,7 @@ import { Calendar } from '@/Pages/ui/calendar';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/Pages/ui/select';
+import { useNavigate } from 'react-router-dom';
 
 const PaymentView = () => {
   const { selectedLot, selectedSpot, setCurrentView, updateReservation, reservation } = useParkingContext();
@@ -48,6 +49,7 @@ const PaymentView = () => {
       
       setCurrentView("confirmation");
     }, 1500);
+    goToStripe
   };
   
   // Generate time slots for the select
@@ -87,6 +89,13 @@ const PaymentView = () => {
   const calculateCost = () => {
     const durationHours = parseInt(duration);
     return selectedSpot.hourlyRate * durationHours;
+  };
+
+  const navigate = useNavigate();
+
+  const goToStripe = () => {
+    navigate('/checkout');
+
   };
   
   return (
@@ -197,38 +206,7 @@ const PaymentView = () => {
               </div>
             </div>
             
-            <div className="space-y-4">
-              <h3 className="font-medium">Payment Information</h3>
-              
-              <div className="space-y-2">
-                <Label htmlFor="cardName">Name on Card</Label>
-                <Input id="cardName" placeholder="John Doe" />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="cardNumber">Card Number</Label>
-                <div className="relative">
-                  <Input id="cardNumber" placeholder="1234 5678 9012 3456" />
-                  <CreditCard className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="expiry">Expiration Date</Label>
-                  <Input id="expiry" placeholder="MM/YY" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="cvc">CVC</Label>
-                  <Input id="cvc" placeholder="123" />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="zipCode">Zip Code</Label>
-                <Input id="zipCode" placeholder="12345" />
-              </div>
-            </div>
+            
           </div>
         </CardContent>
         

@@ -10,6 +10,7 @@ import CreateAccount from './Pages/CreateAccount';
 import About from './Pages/About';
 import NoPage from './Pages/NoPage';
 import FindParking from './Pages/FindParking';
+import Checkout from './Pages/Checkout';
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/find-parking" element={<FindParking/>}/>
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<CreateAccount />} />
+                <Route path="/checkout" element={<Checkout />}/>
                 <Route path="*" element={<NoPage/>} />
             </Routes>
             <Footer />
