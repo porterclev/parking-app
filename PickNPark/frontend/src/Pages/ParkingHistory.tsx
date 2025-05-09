@@ -32,7 +32,7 @@ const ParkingHistory: React.FC<ParkingHistoryProps> = ({ tickets }) => {
 
       {pastTickets.length > 0 && (
         <div>
-          <h3 className="text-sm font-medium text-muted-foreground mb-3">Past Parking</h3>
+          <h3 className="text-sm font-medium text-muted-foreground mb-3"></h3>
           <div className="space-y-4">
             {pastTickets.map(ticket => (
               <ParkingTicket key={ticket.id} {...ticket} />
