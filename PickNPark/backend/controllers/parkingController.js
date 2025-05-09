@@ -3,8 +3,9 @@ const Parking = require('../models/Parking');
 // Reserve w time
 exports.reserveSpot = async (req, res) => {
   try {
-    const { spotNumber, duration } = req.body;    // duration en minutes
-
+    console.log("reserving spot");
+    const { spot, duration, lot, date, user } = req.body;    // duration en minutes
+    console.log(req.body)
     if (!duration || duration <= 0) {
       return res.status(400).json({ message: 'Duration must be a positive number' });
     }
@@ -13,15 +14,18 @@ exports.reserveSpot = async (req, res) => {
     const expires = new Date(now.getTime() + duration * 60000);
 
     // only if reservedBy = null
-    const spot = await Parking.findOneAndUpdate(
-      { spotNumber, reservedBy: null },
-      { $set: { reservedBy: req.user._id, reservedAt: now, reservedUntil: expires } },
-      { new: true }
+    const reservation = await Parking.create(
+      { spotNumber: spot.number, 
+        reservedUntil: expires,
+        location: lot.address,
+        reservedBy: user._id,
+        reservedAt: date
+      },
     );
 
-    if (!spot) {
-      return res.status(400).json({ message: 'Spot not found or already reserve' });
-    }
+    // if (!reservation) {
+    //   return res.status(400).json({ message: 'Spot not found or already reserve' });
+    // }
 
     return res.status(200).json({ message: 'Successfull booking', spot });
   } catch (error) {
