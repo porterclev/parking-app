@@ -13,6 +13,7 @@ const ParkingSchema = new mongoose.Schema({
     hourlyRate: { type: Number, required: true },
     dailyRate: { type: Number, required: true },
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
+    ownerName: { type: String, default: null },
 });
 
 module.exports = mongoose.model('ParkingLots', ParkingSchema);

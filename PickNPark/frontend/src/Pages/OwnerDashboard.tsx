@@ -6,16 +6,11 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { ParkingLotForm } from '@/components/owner/ParkingLotForm';
 import { Plus, Building, MapPin } from 'lucide-react';
 
-const initialParkingLots = [
-  { id: '1', name: 'Downtown Parking', address: '123 Main Street, New York, NY 10001', totalSpots: 300, availableSpots: 23, price: '$2/hr' },
-  { id: '2', name: 'City Center Garage', address: '456 Broadway, New York, NY 10002', totalSpots: 250, availableSpots: 8, price: '$3/hr' },
-  { id: '3', name: 'Riverfront Parking', address: '789 River Road, New York, NY 10003', totalSpots: 180, availableSpots: 45, price: '$1.50/hr' },
-];
 
 const OwnerDashboard = () => {
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
-  const [parkingLots, setParkingLots] = useState(initialParkingLots);
+  const [parkingLots, setParkingLots] = useState([]);
   const handleAddLot = async (newLot) => {
     console.log('New Parking Lot:', newLot);
     const token = localStorage.getItem('token');  
@@ -30,6 +25,39 @@ const OwnerDashboard = () => {
     setShowForm(false);
   };
 
+  React.useEffect(() => {
+    const fetchParkingLots = async () => {
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:5000/api/owner/', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      console.log("data:",data);
+      setParkingLots(data.parkingLots);
+    };
+    fetchParkingLots();
+  }, []);
+  console.log("parking:",parkingLots);
+
+  const removeClick = async (lotId) => {
+    console.log('Removing Parking Lot:', lotId);
+    const token = localStorage.getItem('token');
+    const response = await fetch(`http://localhost:5000/api/parking/remove`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ id: lotId }),
+    });
+    if (response.ok) {
+      setParkingLots(parkingLots.filter(lot => lot.id !== lotId));
+    }
+  };
   return (
     <div className="py-4 space-y-6">
       <div className="mb-4 flex justify-between items-center">
@@ -92,12 +120,12 @@ const OwnerDashboard = () => {
                 </div>
                 <div>
                   <p className="text-muted-foreground">Rate</p>
-                  <p className="font-medium">{lot.price}</p>
+                  <p className="font-medium">${lot.hourlyRate}/hr</p>
                 </div>
               </div>
             </CardContent>
             <CardFooter className="pt-1 border-t">
-              <Button variant="ghost" size="sm" className="ml-auto">
+              <Button variant="ghost" size="sm" className="ml-auto" onClick={() => removeClick(lot.id)}>
                 Remove
               </Button>
             </CardFooter>

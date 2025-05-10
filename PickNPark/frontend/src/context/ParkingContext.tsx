@@ -23,6 +23,8 @@ export type ParkingLot = {
   hourlyRate: number;
   dailyRate: number;
   image?: string;
+  owner?: string;
+  ownerName: string;
 };
 
 export type ReservationDetails = {
@@ -73,64 +75,79 @@ const deg2rad = (deg) => {
 const ParkingContext = createContext<ParkingContextType | undefined>(undefined);
 
 // Sample parking lot data
-const sampleParkingLots: ParkingLot[] = [
-  // 33.78606725053306, -118.10844036371701
+// const sampleParkingLots: ParkingLot[] = [
+//   // 33.78606725053306, -118.10844036371701
+//   {
+//     id: "lot-1",
+//     name: "G14",
+//     address: "123 Main St, Downtown",
+//     lat: 33.78606725053306,
+//     lng: -118.10844036371701,
+//     totalSpots: 150,
+//     availableSpots: 42,
+//     levels: 1,
+//     hasElevator: true,
+//     hourlyRate: 5,
+//     dailyRate: 25
+//   },
+//   //33.78735274617551, -118.10841781060066
+//   {
+//     id: "lot-2",
+//     name: "G13",
+//     address: "456 Market St, City Center",
+//     lat: 33.78735274617551,
+//     lng: -118.10841781060066,
+//     totalSpots: 200,
+//     availableSpots: 65,
+//     levels: 1,
+//     hasElevator: true,
+//     hourlyRate: 6,
+//     dailyRate: 30
+//   },
+//   // 33.78568194199987, -118.10903471868853
+//   {
+//     id: "lot-3",
+//     name: "Parking Structure 2",
+//     address: "789 West Ave, Westside",
+//     lat: 33.78568194199987,
+//     lng: -118.10903471868853,
+//     totalSpots: 90,
+//     availableSpots: 12,
+//     levels: 4,
+//     hasElevator: false,
+//     hourlyRate: 4,
+//     dailyRate: 20
+//   },
+//   // 33.787407361649514, -118.1093404905339
+//   {
+//     id: "lot-4",
+//     name: "Parking Structure 3",
+//     address: "789 West Ave, Westside",
+//     lat: 33.7874,
+//     lng: -118.1093,
+//     totalSpots: 90,
+//     availableSpots: 12,
+//     levels: 4,
+//     hasElevator: false,
+//     hourlyRate: 4,
+//     dailyRate: 20
+//   }
+// ];
+const sampleParkingLots: ParkingLot[] = await fetch("http://localhost:5000/api/parking/parkinglots",
   {
-    id: "lot-1",
-    name: "G14",
-    address: "123 Main St, Downtown",
-    lat: 33.78606725053306,
-    lng: -118.10844036371701,
-    totalSpots: 150,
-    availableSpots: 42,
-    levels: 1,
-    hasElevator: true,
-    hourlyRate: 5,
-    dailyRate: 25
-  },
-  //33.78735274617551, -118.10841781060066
-  {
-    id: "lot-2",
-    name: "G13",
-    address: "456 Market St, City Center",
-    lat: 33.78735274617551,
-    lng: -118.10841781060066,
-    totalSpots: 200,
-    availableSpots: 65,
-    levels: 1,
-    hasElevator: true,
-    hourlyRate: 6,
-    dailyRate: 30
-  },
-  // 33.78568194199987, -118.10903471868853
-  {
-    id: "lot-3",
-    name: "Parking Structure 2",
-    address: "789 West Ave, Westside",
-    lat: 33.78568194199987,
-    lng: -118.10903471868853,
-    totalSpots: 90,
-    availableSpots: 12,
-    levels: 4,
-    hasElevator: false,
-    hourlyRate: 4,
-    dailyRate: 20
-  },
-  // 33.787407361649514, -118.1093404905339
-  {
-    id: "lot-4",
-    name: "Parking Structure 3",
-    address: "789 West Ave, Westside",
-    lat: 33.7874,
-    lng: -118.1093,
-    totalSpots: 90,
-    availableSpots: 12,
-    levels: 4,
-    hasElevator: false,
-    hourlyRate: 4,
-    dailyRate: 20
-  }
-];
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
+  .then((response) => response.json())
+  .then((data) => data.parkingLots)
+  .catch((error) => {
+    console.error("Error fetching parking lots:", error);
+    return [];
+  });
+
 
 // Generate sample parking spots for a specific level and lot
 const generateSampleSpots = async (lotId: string, level: number): Promise<ParkingSpot[]> => {

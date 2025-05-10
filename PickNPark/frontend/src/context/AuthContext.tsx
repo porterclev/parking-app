@@ -52,7 +52,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 console.log("TOKEN,", data.token)
                 localStorage.setItem('token', data.token);
                 setUser(data.user);
-                console.log("data",data);
+                console.log("owner",data.user.owner);
                 setIsOwner(data.user.owner);
                 setIsAuthenticated(true);
                 // Redirect to the homepage
@@ -98,6 +98,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 localStorage.setItem('token', data.token);
                 setUser(data.user);
                 setIsAuthenticated(true);
+                // setIsOwner(data.user.owner);
                 // Redirect to the login page
             } else {
                 alert(data.message || 'Failed to create account');
@@ -119,6 +120,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         user,
         isAuthenticated,
         isLoading,
+        isOwner,
         login,
         signup,
         logout,

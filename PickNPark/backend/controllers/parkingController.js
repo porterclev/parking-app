@@ -115,10 +115,14 @@ exports.assignOwner = async (req, res) => {
   }
 };
 
-exports.createParkingSpot = async (req, res) => {
+exports.createParking = async (req, res) => {
   try {
     console.log(req.body);
+    
     const { user, id, lat, lng, name, address, availableSpots, levels, hasElevator, totalSpots, hourlyRate, dailyRate } = req.body;
+    if(user.owner !== true) {
+      return res.status(403).json({ message: 'Unauthorized' });
+    }
     const parkingLot = await ParkingLot.create({
       id,
       lat,
@@ -132,11 +136,44 @@ exports.createParkingSpot = async (req, res) => {
       hourlyRate,
       dailyRate,
       owner: user._id,
+      ownerName: user.username,
     });
     return res.status(201).json({ message: 'Parking spot created', parkingLot });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Server error' });
     
+  }
+}
+exports.getParkingLots = async (req, res) => {
+  try {
+    const parkingLots = await ParkingLot.find();
+    if (!parkingLots) {
+      return res.status(404).json({ message: 'No parking lots found' });
+    }
+    return res.status(200).json({ parkingLots });
+  } catch (error) {
+    console.error('Error in getParkingLots:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
+exports.removeParkingLot = async (req, res) => {
+  console.log("removing parking lot");
+  try {
+    const { user, id } = req.body;
+    const parkinglot = await ParkingLot.find({id: id});
+    console.log(parkinglot);
+    if (!parkinglot) {
+      return res.status(404).json({ message: 'Parking lot not found' });
+    }
+    if (parkinglot[0].owner._id.toString() !== user._id.toString()) {
+      return res.status(403).json({ message: 'Unauthorized' });
+    }
+    await ParkingLot.deleteOne({id: id});
+    return res.status(200).json({ message: 'Parking lot removed', parkinglot });
+  } catch (error) {
+    console.error('Error in removeParkingLot:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 }

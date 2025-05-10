@@ -25,6 +25,7 @@ app.get('/', (req, res) => {
 // Auth routes
 app.use('/api/auth', authRoutes);
 app.use('/api/parking', parkingRoutes);
+app.use('/api/owner', ownerRoutes);
 
 
 // Stripe Checkout route

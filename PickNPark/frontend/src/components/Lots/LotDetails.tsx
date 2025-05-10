@@ -3,7 +3,7 @@ import { useParkingContext } from '@/context/ParkingContext';
 import { Button } from '@/Pages/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/Pages/ui/card';
 import { Badge } from '@/Pages/ui/badge';
-import { ArrowLeft, CircleParking, Car, Clock, DollarSign, MapPin } from 'lucide-react';
+import { ArrowLeft, CircleParking, Car, Clock, DollarSign, MapPin, User } from 'lucide-react';
 
 const LotDetails = () => {
   const { selectedLot, setCurrentView, setSelectedLot } = useParkingContext();
@@ -65,15 +65,19 @@ const LotDetails = () => {
               <MapPin className="h-5 w-5 mr-2 text-muted-foreground" />
               <span>{selectedLot.levels} Levels</span>
             </div>
+            <div className="flex items-center">
+              <User className="h-5 w-5 mr-2 text-muted-foreground" />
+              <span>{selectedLot.ownerName}</span>
+            </div>
           </div>
           
           <div className="bg-muted p-3 rounded-md mb-2">
             <h4 className="font-medium mb-1">Features</h4>
             <div className="flex flex-wrap gap-2">
-              <Badge variant="outline">Covered</Badge>
-              <Badge variant="outline">Security</Badge>
+              {/* <Badge variant="outline">Covered</Badge>
+              <Badge variant="outline">Security</Badge> */}
               {selectedLot.hasElevator && <Badge variant="outline">Elevator</Badge>}
-              <Badge variant="outline">24/7 Access</Badge>
+              {/* <Badge variant="outline">24/7 Access</Badge> */}
             </div>
           </div>
         </CardContent>

@@ -20,4 +20,8 @@ router.get('/my-spots', auth, parkingController.getSpotsByOwner);
 //route pour assigner une place à un propriétaire
 router.post('/assign-owner', authMiddleware, parkingController.assignOwner);
 
+router.post('/createParking', authMiddleware, parkingController.createParking);
+
+router.get('/parkinglots', authMiddleware, parkingController.getParkingLots);
+router.delete('/remove', authMiddleware, parkingController.removeParkingLot);
 module.exports = router;
