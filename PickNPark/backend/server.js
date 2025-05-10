@@ -3,6 +3,7 @@ const express = require('express');
 const connectDB = require('./db/db');
 const authRoutes = require('./routes/authRoutes');
 const parkingRoutes = require('./routes/parkingRoutes');
+const ownerRoutes = require('./routes/ownerRoutes');
 const Parking = require('./models/Parking');
 const app = express();
 const cors = require('cors');

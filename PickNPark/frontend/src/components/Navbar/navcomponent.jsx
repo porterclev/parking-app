@@ -12,7 +12,7 @@ import {useAuth} from "../../context/AuthContext.js";
 
 const Navbar = () => {
 
-    const { isAuthenticated, logout } = useAuth();
+    const { isAuthenticated, isOwner, logout } = useAuth();
 
     return (
         <>
@@ -31,6 +31,9 @@ const Navbar = () => {
                     </NavLink>
                     <NavLink to="/my-spots" >
                         My Spots
+                    </NavLink>
+                    <NavLink to="/owner" >
+                        Owner Dashboard
                     </NavLink>
                     {/* Second Nav */}
                     {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}

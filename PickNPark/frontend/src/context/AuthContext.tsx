@@ -4,12 +4,14 @@ interface User {
     id: string;
     email: string;
     username?: string;
+    owner?: boolean;
 }
 
 interface AuthContextType {
     user: User | null;
     isAuthenticated: boolean;
     isLoading: boolean;
+    isOwner: boolean;
     login: (email: string, password: string) => Promise<void>;
     signup: (email: string, password: string, name?: string) => Promise<void>;
     logout: () => Promise<void>;
@@ -25,7 +27,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading,] = useState<boolean>(true);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-    console.log(isAuthenticated);
+    const [isOwner, setIsOwner] = useState<boolean>(false);
+    // console.log(isAuthenticated);
     const login = async (identifier: string, password: string) => {
         setIsLoading(true);
         try {
@@ -49,6 +52,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                 console.log("TOKEN,", data.token)
                 localStorage.setItem('token', data.token);
                 setUser(data.user);
+                console.log("data",data);
+                setIsOwner(data.user.owner);
+                setIsAuthenticated(true);
                 // Redirect to the homepage
             } else {
                 alert(data.message || 'Invalid email/username or password');
@@ -61,13 +67,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
     };
 
-    const signup = async (email: string, password: string, userName: string) => {
+    const signup = async (email: string, password: string, userName: string, owner: string) => {
         setIsLoading(true);
         try {
             console.log('Sending Request:', {
                 username: userName,
                 email: email,
                 password: password,
+                owner: owner,
             });
 
             const response = await fetch('http://localhost:5000/api/auth/register', {
@@ -79,6 +86,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                     username: userName,
                     email: email,
                     password: password,
+                    owner: owner,
                 }),
             });
 
@@ -101,7 +109,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             setIsLoading(false);
         }
     };
-
     const logout = async () => {
         localStorage.removeItem('token');
         setUser(null);

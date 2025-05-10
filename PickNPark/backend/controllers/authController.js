@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 // Register a new user
 const registerUser = async (req, res) => {
     const { username, email, password } = req.body;
+    console.log(req.body); // Log the request body
 
     try {
         console.log('Incoming Request:', req.body); // Log the request body
@@ -36,7 +37,6 @@ const registerUser = async (req, res) => {
 // Login a user
 const loginUser = async (req, res) => {
     const { identifier, password } = req.body;
-
     try {
         // Check if the user exists (by email or username)
         const user = await User.findOne({
@@ -56,7 +56,7 @@ const loginUser = async (req, res) => {
         // Generate a JWT token
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-        res.status(200).json({ message: 'Login successful', token, user: { id: user._id, email: user.email, username: user.username }});
+        res.status(200).json({ message: 'Login successful', token, user: { id: user._id, email: user.email, username: user.username, owner: user.owner }});
     } catch (error) {
         console.error('Error in loginUser:', error);
         res.status(500).json({ message: 'Server error' });

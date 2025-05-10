@@ -1,4 +1,5 @@
 const Parking = require('../models/Parking');
+const ParkingLot = require('../models/ParkingLots');
 
 // Reserve w time
 exports.reserveSpot = async (req, res) => {
@@ -113,3 +114,29 @@ exports.assignOwner = async (req, res) => {
     return res.status(500).json({ message: 'Erreur serveur' });
   }
 };
+
+exports.createParkingSpot = async (req, res) => {
+  try {
+    console.log(req.body);
+    const { user, id, lat, lng, name, address, availableSpots, levels, hasElevator, totalSpots, hourlyRate, dailyRate } = req.body;
+    const parkingLot = await ParkingLot.create({
+      id,
+      lat,
+      lng,
+      name,
+      address,
+      availableSpots,
+      levels,
+      hasElevator,
+      totalSpots,
+      hourlyRate,
+      dailyRate,
+      owner: user._id,
+    });
+    return res.status(201).json({ message: 'Parking spot created', parkingLot });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Server error' });
+    
+  }
+}

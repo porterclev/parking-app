@@ -77,6 +77,7 @@ const CreateAccount = () => {
                     <div>
                         <input
                             type="text"
+                            name="username"
                             placeholder="Username"
                             value={userName}
                             onChange={(e) => setUserName(e.target.value)}
@@ -86,12 +87,15 @@ const CreateAccount = () => {
                                 marginBottom: '10px',
                                 borderRadius: '5px',
                                 border: '1px solid #ccc',
+                                backgroundColor: '#f9f9f9', // Changed background color
                             }}
+                            autoComplete="username"
                         />
                     </div>
                     <div>
                         <input
                             type="email"
+                            name="email"
                             placeholder="Email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -101,12 +105,15 @@ const CreateAccount = () => {
                                 marginBottom: '10px',
                                 borderRadius: '5px',
                                 border: '1px solid #ccc',
+                                backgroundColor: '#f9f9f9', // Changed background color
                             }}
+                            autoComplete="email"
                         />
                     </div>
                     <div>
                         <input
                             type="password"
+                            name="password"
                             placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -116,7 +123,9 @@ const CreateAccount = () => {
                                 marginBottom: '10px',
                                 borderRadius: '5px',
                                 border: '1px solid #ccc',
+                                backgroundColor: '#f9f9f9', // Changed background color
                             }}
+                            autoComplete="new-password"
                         />
                     </div>
                     <button type="submit">Create Account</button>

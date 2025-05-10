@@ -6,6 +6,7 @@ import Footer from './components/Footer/footercomponent';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import CreateAccount from './Pages/CreateAccount';
+import OwnerDashboard from './Pages/OwnerDashboard';
 import About from './Pages/About';
 import NoPage from './Pages/NoPage';
 import ParkingHistory from './Pages/ParkingHistory';
@@ -45,6 +46,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<CreateAccount />} />
                 <Route path="/checkout" element={<Checkout />}/>
+                <Route path="/owner" element={<OwnerDashboard />} />
                 <Route path="*" element={<NoPage/>} />
             </Routes>
             <Footer />
