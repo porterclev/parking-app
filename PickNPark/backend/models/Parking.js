@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const ParkingSchema = new mongoose.Schema({
   spotNumber:  { type: String, required: true },
   lot: {type: String},
+  lotName: {type: String},
   spaceId: {type: String},
   location:    { type: String, default: '' },
   owner:        { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },

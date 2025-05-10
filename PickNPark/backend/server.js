@@ -27,7 +27,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/parking', parkingRoutes);
 app.use('/api/owner', ownerRoutes);
 
-
 // Stripe Checkout route
 app.post('/create-checkout-session', async (req, res) => {
   try {

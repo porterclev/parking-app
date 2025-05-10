@@ -25,9 +25,6 @@ const Checkout = () => {
       <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
         <EmbeddedCheckout />
       </EmbeddedCheckoutProvider>
-      <h1>
-        Test
-      </h1>
     </div>
 
   );

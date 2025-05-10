@@ -14,35 +14,9 @@ const Login = () => {
         }
     }, [isAuthenticated]);
 
-    const handleSubmit = async (e) => {
+   const handleSubmit = async (e) => {
         e.preventDefault();
-
-        try {
-            const response = await fetch('http://localhost:5000/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    identifier, // Send the identifier (email or username)
-                    password,
-                }),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                alert('Login successful!');
-                // Save the token to localStorage or cookies if needed
-                localStorage.setItem('token', data.token);
-                navigate('/home'); // Redirect to the homepage
-            } else {
-                alert(data.message || 'Invalid email/username or password');
-            }
-        } catch (error) {
-            console.error('Error logging in:', error);
-            alert('An error occurred. Please try again.');
-        }
+        await login(identifier, password);
     };
 
     return (
@@ -79,6 +53,7 @@ const Login = () => {
                             marginBottom: '10px',
                             borderRadius: '5px',
                             border: '1px solid #ccc',
+                            backgroundColor: '#f9f9f9', // Changed background color
                         }}
                     />
                 </div>
@@ -94,6 +69,7 @@ const Login = () => {
                             marginBottom: '10px',
                             borderRadius: '5px',
                             border: '1px solid #ccc',
+                            backgroundColor: '#f9f9f9', // Changed background color
                         }}
                     />
                 </div>

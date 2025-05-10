@@ -13,8 +13,8 @@ import {useAuth} from "../../context/AuthContext.js";
 const Navbar = () => {
 
     const { isAuthenticated, isOwner, logout } = useAuth();
-    console.log(isOwner);
-    console.log(isAuthenticated);
+    console.log("owner", isOwner);
+    console.log("auth", isAuthenticated);
     return (
         <>
             <Nav>

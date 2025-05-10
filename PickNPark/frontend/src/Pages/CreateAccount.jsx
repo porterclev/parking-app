@@ -42,7 +42,8 @@ const CreateAccount = () => {
 
         if (response.ok) {
             alert('Account created successfully!');
-            navigate('/'); // Redirect to the login page
+            // await login(identifier, password);
+            navigate('/login'); // Redirect to the login page
         } else {
             alert(data.message || 'Failed to create account');
         }

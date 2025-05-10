@@ -19,6 +19,7 @@ exports.reserveSpot = async (req, res) => {
       { 
         spaceId: spot.id,
         lot: lot.id,
+        lotName: lot.name,
         spotNumber: spot.number, 
         reservedUntil: expires,
         location: lot.address,
@@ -43,6 +44,7 @@ exports.reserveSpot = async (req, res) => {
 
 exports.getParkingSpots = async (req, res) => {
   try {
+    const { user } = req.body;
     const now = new Date();
     console.log('Current time:', now);
     const result = await Parking.updateMany(
@@ -59,7 +61,17 @@ exports.getParkingSpots = async (req, res) => {
     return res.status(500).json({ message: 'Serv error' });
   }
 };
-
+exports.getUserParkingSpots = async (req, res) => {
+  try {
+    const { user } = req.body;
+    const spots = await Parking.find({ reservedBy: user._id });
+    console.log('User spots:', spots);
+    return res.status(200).json({ spots });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Serv error' });
+  }
+};
 //cancel : empty reservedUntil
 exports.cancelReservation = async (req, res) => {
   try {

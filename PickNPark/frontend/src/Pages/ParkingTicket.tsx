@@ -5,6 +5,7 @@ import { Clock, Calendar, CarFront, Ticket } from 'lucide-react';
 
 interface ParkingTicketProps {
     id: string;
+    lotName: string;
     spotNumber: string;
     location: string;
     reservedBy: string;
@@ -17,6 +18,7 @@ export const ParkingTicket: React.FC<ParkingTicketProps> = ({
   id,
   location,
   spotNumber,
+  lotName,
   reservedAt,
   reservedBy,
   reservedUntil,
@@ -36,7 +38,8 @@ export const ParkingTicket: React.FC<ParkingTicketProps> = ({
           <div className="flex items-start text-left">
             <Ticket className="w-8 h-8 text-primary opacity-80 mr-4" />
             <div>
-              <h3 className="text-lg font-semibold">{location}</h3>
+              <h3 className="text-lg font-semibold"> {location} </h3>
+              <p className="text-sm text-muted-foreground mt-1">Lot {lotName}</p>
               <p className="text-muted-foreground text-sm mt-1">Spot {spotNumber}</p>
             </div>
           </div>

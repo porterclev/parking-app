@@ -15,25 +15,6 @@ import Checkout from './Pages/Checkout';
 import {AuthProvider} from "@/context/AuthContext.js";
 
 function App() {
-    const [history, setHistory] = useState([]);
-
-    useEffect(() => {
-        const fetchSpots = async () => {
-            const token = localStorage.getItem('token');
-            const hist = await fetch(`http://localhost:5000/api/parking/`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-            });
-            const histData = await hist.json();
-            setHistory(histData.spots);
-        };
-
-        fetchSpots();
-    }, []);
-
     return (
         <AuthProvider>
         <Router>
@@ -42,7 +23,7 @@ function App() {
                 <Route index element={<Home />} />
                 <Route path="/about" element={<About/>}/>
                 <Route path="/find-parking" element={<FindParking />}/>
-                <Route path="/my-spots" element={<ParkingHistory tickets={history} />} />
+                <Route path="/my-spots" element={<ParkingHistory/>} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<CreateAccount />} />
                 <Route path="/checkout" element={<Checkout />}/>

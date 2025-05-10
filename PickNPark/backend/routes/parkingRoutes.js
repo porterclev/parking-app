@@ -8,6 +8,8 @@ const auth = require('../middlewares/auth');
 //route pour récupérer toutes les places
 router.get('/', authMiddleware, parkingController.getParkingSpots);
 
+router.get('/user-spots', authMiddleware, parkingController.getUserParkingSpots);
+
 //route pour réserver une place
 router.post('/reserve', authMiddleware, parkingController.reserveSpot);
 
