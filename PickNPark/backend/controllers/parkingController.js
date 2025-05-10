@@ -15,11 +15,15 @@ exports.reserveSpot = async (req, res) => {
 
     // only if reservedBy = null
     const reservation = await Parking.create(
-      { spotNumber: spot.number, 
+      { 
+        spaceId: spot.id,
+        lot: lot.id,
+        spotNumber: spot.number, 
         reservedUntil: expires,
         location: lot.address,
         reservedBy: user._id,
-        reservedAt: date
+        reservedAt: date,
+        isActive: true,
       },
     );
 
@@ -38,13 +42,16 @@ exports.reserveSpot = async (req, res) => {
 
 exports.getParkingSpots = async (req, res) => {
   try {
-    // const now = new Date();
-    // await Parking.updateMany(
-    //   { reservedUntil: { $lte: now }, reservedBy: { $ne: null } },
-    //   { $set: { reservedBy: null, reservedAt: null, reservedUntil: null } }
-    // );
+    const now = new Date();
+    console.log('Current time:', now);
+    const result = await Parking.updateMany(
+      { reservedUntil: { $lte: now }, isActive: true },
+      { $set: { isActive: false } }
+    );
+    console.log('Updated spots:', result);
 
     const spots = await Parking.find();
+    
     return res.status(200).json({ spots });
   } catch (error) {
     console.error(error);

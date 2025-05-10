@@ -40,7 +40,7 @@ function App() {
             <Routes>      
                 <Route index element={<Home />} />
                 <Route path="/about" element={<About/>}/>
-                <Route path="/find-parking" element={<FindParking/>}/>
+                <Route path="/find-parking" element={<FindParking />}/>
                 <Route path="/my-spots" element={<ParkingHistory tickets={history} />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<CreateAccount />} />

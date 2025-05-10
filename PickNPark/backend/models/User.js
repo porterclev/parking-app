@@ -19,6 +19,10 @@ const userSchema = new mongoose.Schema({
     dateCreated: {
         type: Date,
         default: Date.now
+    },
+    owner: {
+        type: Boolean,
+        default: false
     }
 });
 

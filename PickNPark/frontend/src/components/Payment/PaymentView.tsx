@@ -46,7 +46,7 @@ const PaymentView = () => {
                     lot: selectedLot,
                     spot: selectedSpot,
                     duration: durationHours,
-                    date: startTime
+                    date: startTime,
                 }),
             });
     console.log(response);

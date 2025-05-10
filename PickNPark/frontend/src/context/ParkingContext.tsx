@@ -133,24 +133,45 @@ const sampleParkingLots: ParkingLot[] = [
 ];
 
 // Generate sample parking spots for a specific level and lot
-const generateSampleSpots = (lotId: string, level: number): ParkingSpot[] => {
+const generateSampleSpots = async (lotId: string, level: number): Promise<ParkingSpot[]> => {
   const spots: ParkingSpot[] = [];
   const totalSpots = level === 1 ? 30 : level === 2 ? 25 : 20;
-  
+  const token = localStorage.getItem('token');
+  const hist = await fetch(`http://localhost:5000/api/parking/`, {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+      },
+  });
+  const histData = await hist.json();
+  console.log(histData.spots);
+
   for (let i = 1; i <= totalSpots; i++) {
     const spotNumber = `${level}${i.toString().padStart(2, '0')}`;
     const isHandicap = i <= 3;
     const isElectric = i > totalSpots - 5;
     const type = isHandicap ? "handicap" : isElectric ? "electric" : "standard";
-    
-    spots.push({
-      id: `${lotId}-spot-${spotNumber}`,
-      level,
-      number: spotNumber,
-      available: Math.random() > 0.3, // 70% chance of being available
-      type,
-      hourlyRate: type === "electric" ? 7 : 5
-    });
+    // console.log(hist.spot);
+    if (histData.spots.some(spot => spot.spaceId === `${lotId}-spot-${spotNumber}` && spot.isActive)) {
+      spots.push({
+        id: `${lotId}-spot-${spotNumber}`,
+        level,
+        number: spotNumber,
+        available: false,
+        type,
+        hourlyRate: type === "electric" ? 7 : 5
+      });
+    } else {
+      spots.push({
+        id: `${lotId}-spot-${spotNumber}`,
+        level,
+        number: spotNumber,
+        available: true,
+        type,
+        hourlyRate: type === "electric" ? 7 : 5
+      });
+    };
   }
   
   return spots;
@@ -188,7 +209,20 @@ export const ParkingProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // Calculate available spots based on selected lot and level
-  const availableSpots = selectedLot ? generateSampleSpots(selectedLot.id, selectedLevel) : [];
+  const [availableSpots, setAvailableSpots] = useState<ParkingSpot[]>([]);
+
+  useEffect(() => {
+    const fetchAvailableSpots = async () => {
+      if (selectedLot) {
+        const spots = await generateSampleSpots(selectedLot.id, selectedLevel);
+        setAvailableSpots(spots);
+      } else {
+        setAvailableSpots([]);
+      }
+    };
+
+    fetchAvailableSpots();
+  }, [selectedLot, selectedLevel]);
 
   const updateReservation = (details: Partial<ReservationDetails>) => {
     setReservation(prev => ({ ...prev, ...details }));
